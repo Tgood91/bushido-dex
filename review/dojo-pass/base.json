@@ -1,0 +1,90 @@
+{
+  "name": "Dojo Pass · 0xBA39…b111",
+  "description": "A living record of practice. This pass evolves with its holder's trades, check-ins and virtues. Not yet recorded on-chain: swap volume; check-ins; virtues Meiyo, Chugi, Jisei. The app view is live; marketplaces update when they re-fetch metadata.",
+  "image": "https://bushido-dapp.onrender.com/api/dojo-pass/base/0xBA397fAae1D5Fe10C0356f2e585bef34577ab111/image.svg",
+  "external_url": "https://bushido-dapp.onrender.com/api/dojo-pass/base/0xBA397fAae1D5Fe10C0356f2e585bef34577ab111/metadata",
+  "attributes": [
+    {
+      "trait_type": "Rank",
+      "value": "Tsurano"
+    },
+    {
+      "trait_type": "Standing",
+      "value": 0,
+      "display_type": "number",
+      "max_value": 100
+    },
+    {
+      "trait_type": "Pass Age (days)",
+      "value": 14,
+      "display_type": "number"
+    },
+    {
+      "trait_type": "Recorded Trades",
+      "value": 0,
+      "display_type": "number"
+    },
+    {
+      "trait_type": "Discipline Volume (USD)",
+      "value": "Not yet recorded"
+    },
+    {
+      "trait_type": "Check-in Streak (days)",
+      "value": "Not yet recorded"
+    },
+    {
+      "trait_type": "Total Check-ins",
+      "value": "Not yet recorded"
+    },
+    {
+      "trait_type": "Home Chain",
+      "value": "Monad"
+    },
+    {
+      "trait_type": "Practitioner",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Virtue — Gi",
+      "value": 0,
+      "display_type": "number",
+      "max_value": 4
+    },
+    {
+      "trait_type": "Virtue — Yu",
+      "value": 0,
+      "display_type": "number",
+      "max_value": 4
+    },
+    {
+      "trait_type": "Virtue — Jin",
+      "value": 0,
+      "display_type": "number",
+      "max_value": 4
+    },
+    {
+      "trait_type": "Virtue — Rei",
+      "value": 0,
+      "display_type": "number",
+      "max_value": 4
+    },
+    {
+      "trait_type": "Virtue — Makoto",
+      "value": 0,
+      "display_type": "number",
+      "max_value": 4
+    },
+    {
+      "trait_type": "Virtue — Meiyo",
+      "value": "Not yet recorded"
+    },
+    {
+      "trait_type": "Virtue — Chugi",
+      "value": "Not yet recorded"
+    },
+    {
+      "trait_type": "Virtue — Jisei",
+      "value": "Not yet recorded"
+    }
+  ]
+}

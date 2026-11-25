@@ -1,7 +1,9 @@
 import express, { Request, Response } from 'express';
+import { dojoPassRouter } from './dojoPass/routes.js';
 
 const app = express();
 app.use(express.json());
+app.use(dojoPassRouter);
 
 app.get('/api/health', (_req: Request, res: Response) => {
   res.json({
