@@ -29,6 +29,18 @@ function baseUrl(req: Request): string {
   return process.env.PUBLIC_BASE_URL || `${req.protocol}://${req.get('host')}`;
 }
 
+/**
+ * Accepts a holder address, or a DojoPassDNA tokenId (decimal), which is
+ * uint160(holder) by construction. Returns null if neither.
+ */
+export function holderFromParam(p: string): `0x${string}` | null {
+  if (isAddress(p)) return getAddress(p);
+  if (!/^\d{1,49}$/.test(p)) return null;
+  const id = BigInt(p);
+  if (id === 0n || id >= 1n << 160n) return null;
+  return getAddress(`0x${id.toString(16).padStart(40, '0')}`);
+}
+
 async function load(req: Request, res: Response): Promise<PassAttributes | null> {
   const chain = String(req.params.chain);
   const address = String(req.params.address);
@@ -36,12 +48,13 @@ async function load(req: Request, res: Response): Promise<PassAttributes | null>
     res.status(400).json({ error: `chain must be one of ${CHAIN_KEYS.join(', ')}` });
     return null;
   }
-  if (!isAddress(address)) {
-    res.status(400).json({ error: 'invalid address' });
+  const holder = holderFromParam(address);
+  if (!holder) {
+    res.status(400).json({ error: 'invalid address or tokenId' });
     return null;
   }
   try {
-    return await getPassAttributes(chain as ChainKey, getAddress(address));
+    return await getPassAttributes(chain as ChainKey, holder);
   } catch (e) {
     if (e instanceof NoPassError) {
       res.status(404).json({ error: e.message });
@@ -55,7 +68,8 @@ async function load(req: Request, res: Response): Promise<PassAttributes | null>
 
 export const dojoPassRouter = Router();
 
-dojoPassRouter.get('/api/dojo-pass/:chain/:address/metadata', async (req, res) => {
+// `/:chain/:id` is what DojoPassDNA.tokenURI produces (baseURI + decimal tokenId).
+dojoPassRouter.get(['/api/dojo-pass/:chain/:address/metadata', '/api/dojo-pass/:chain/:address'], async (req, res) => {
   const a = await load(req, res);
   if (!a) return;
   res.set('Cache-Control', 'public, max-age=300').json(buildMetadata(a, baseUrl(req)));

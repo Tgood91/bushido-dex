@@ -7,7 +7,7 @@ import {
 import { buildMetadata } from './metadata.js';
 import { renderPassSvg } from './render.js';
 
-const HOLDER = '0xba397faAe1D5fe10C0356F2E585bEf34577aB111' as const;
+const HOLDER = '0xBA397fAae1D5Fe10C0356f2e585bef34577ab111' as const; // EIP-55 checksum
 const NOW = 1_800_000_000;
 
 function stubReader(over: Partial<{ base: boolean; monad: boolean; trades: number; honor: number; scores: number[] }> = {}): PassReader {
@@ -100,4 +100,14 @@ test('metadata: ERC-721 shape, numeric traits, string gaps', () => {
   assert.deepEqual(byType['Virtue — Jisei'], { trait_type: 'Virtue — Jisei', value: NOT_RECORDED });
   assert.deepEqual(byType['Check-in Streak (days)'], { trait_type: 'Check-in Streak (days)', value: NOT_RECORDED });
   assert.match(m.description, /Not yet recorded on-chain: swap volume; check-ins; virtues Meiyo, Chugi, Jisei\./);
+});
+
+test('route param: address or DojoPassDNA tokenId (uint160(holder))', async () => {
+  const { holderFromParam } = await import('./routes.js');
+  const id = BigInt(HOLDER).toString(10);
+  assert.equal(holderFromParam(id), HOLDER);
+  assert.equal(holderFromParam(HOLDER.toLowerCase()), HOLDER);
+  assert.equal(holderFromParam('0'), null);
+  assert.equal(holderFromParam((1n << 160n).toString()), null);
+  assert.equal(holderFromParam('12abc'), null);
 });
