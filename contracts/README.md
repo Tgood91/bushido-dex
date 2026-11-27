@@ -1,4 +1,7 @@
-# Bushido DEX: Monad and OP Stack
+# Bushido DEX: Monad and OP Stack (unaudited)
+
+> **This is the unaudited version of the Bushido DEX.** It runs on testnets only. The mainnet release will ship
+> once these contracts have been audited, from the audited commit recorded below.
 
 V2- and V3-style AMMs for **Monad** and **OP Stack** chains (Base, OP Mainnet, Unichain). Every pool is seeded at the
 live Chainlink price, never a hard-coded number. Copied from `Tgood91/Bushido-future` (`roadmap/contracts`, PRs #8 and #9).
@@ -7,12 +10,12 @@ live Chainlink price, never a hard-coded number. Copied from `Tgood91/Bushido-fu
 
 | | |
 |---|---|
-| Status | **Not audited** |
+| Status | **Not audited yet.** Mainnet release waits on the audit |
 | Auditor | [AUDITOR] |
 | Report | [REPORT LINK] |
 | Audited commit | [COMMIT] |
 
-Until an audit is linked here, treat these contracts as testnet software. The deploy scripts refuse mainnet chain ids
+Until the audit is done and linked here, treat these contracts as testnet software. The deploy scripts refuse mainnet chain ids
 unless `ALLOW_FORK=1`. On a non-testnet chain they never deploy or mint mock tokens: `TOKEN` and `USDC` must be the real
 tokens and `DEPLOYER` must already hold the seed.
 
