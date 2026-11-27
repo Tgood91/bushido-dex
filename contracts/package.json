@@ -1,0 +1,7 @@
+{
+  "name": "bushido-dex-contracts",
+  "private": true,
+  "devDependencies": {
+    "solady": "0.1.26"
+  }
+}
